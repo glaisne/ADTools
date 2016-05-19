@@ -7,7 +7,6 @@
 . $PSScriptRoot\Get-DomainControllers.ps1
 . $PSScriptRoot\Get-SIDHistoryDomain.ps1
 . $PSScriptRoot\Get-WindowsServers.ps1
-. $PSScriptRoot\InstallModule.ps1
 . $PSScriptRoot\Split-ADDNPath.ps1
 . $PSScriptRoot\Start-ADUserPoll.ps1
 . $PSScriptRoot\Test-sAMAccountNameExists.ps1
