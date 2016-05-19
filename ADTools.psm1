@@ -2,16 +2,16 @@
 
 
 # Load External functions.
-. .\Convert-CanonicalNameToDistinguishedName.ps1
-. .\Get-ADTrustedDomains.ps1
-. .\Get-DomainControllers.ps1
-. .\Get-SIDHistoryDomain.ps1
-. .\Get-WindowsServers.ps1
-. .\InstallModule.ps1
-. .\Split-ADDNPath.ps1
-. .\Start-ADUserPoll.ps1
-. .\Test-sAMAccountNameExists.ps1
-. .\Test-UPNExists.ps1
+. $PSScriptRoot\Convert-CanonicalNameToDistinguishedName.ps1
+. $PSScriptRoot\Get-ADTrustedDomains.ps1
+. $PSScriptRoot\Get-DomainControllers.ps1
+. $PSScriptRoot\Get-SIDHistoryDomain.ps1
+. $PSScriptRoot\Get-WindowsServers.ps1
+. $PSScriptRoot\InstallModule.ps1
+. $PSScriptRoot\Split-ADDNPath.ps1
+. $PSScriptRoot\Start-ADUserPoll.ps1
+. $PSScriptRoot\Test-sAMAccountNameExists.ps1
+. $PSScriptRoot\Test-UPNExists.ps1
 
 
 
