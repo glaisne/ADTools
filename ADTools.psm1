@@ -1412,7 +1412,7 @@ zoology
 
         $number = get-random -Minimum 1000 -Maximum 9999
 
-        $symbolList = "!@#%^*_+-=?"
+        $symbolList = "!@#%^*_+-?"
         $symbolArray = $symbolList.ToCharArray()
 
         $Symbols = "$($symbolArray | get-random -Count $SymbolCount)".replace(' ','')
