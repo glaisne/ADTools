@@ -19,6 +19,8 @@ Split-ADDNPath.ps1
 Start-ADUserPoll.ps1
 Test-sAMAccountNameExists.ps1
 Test-UPNExists.ps1
+Get-NearbyDCHostname.ps1
+Test-DomainLockoutStatus.ps1
 "@
 
 $filelist -split "`n" | % { Copy-Item -Verbose -Path "$pwd\$($_.trim())" -Destination "$($TargetPath)\$($_.trim())" }

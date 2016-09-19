@@ -11,6 +11,8 @@
 . $PSScriptRoot\Start-ADUserPoll.ps1
 . $PSScriptRoot\Test-sAMAccountNameExists.ps1
 . $PSScriptRoot\Test-UPNExists.ps1
+. $PSScriptRoot\Get-NearbyDCHostname.ps1
+. $PSScriptRoot\Test-DomainLockoutStatus.ps1
 
 
 
