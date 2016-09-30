@@ -31,14 +31,14 @@
 
         $UNKNOWN = 'UNKNOWN'
 
-        if ($PSBoundParameters.ContainsKey('Domain'))
-        {
+#        if ($PSBoundParameters.ContainsKey('Domain'))
+#        {
             $TrustedDomains = Get-ADObject -Filter {ObjectClass -eq "trustedDomain"} -Properties cn,securityidentifier -server $Domain
-        }
-        else
-        {
-            $TrustedDomains = Get-ADObject -Filter {ObjectClass -eq "trustedDomain"} -Properties cn,securityidentifier
-        }
+#        }
+#        else
+#        {
+#            $TrustedDomains = Get-ADObject -Filter {ObjectClass -eq "trustedDomain"} -Properties cn,securityidentifier
+#        }
 
     }
     Process
@@ -53,11 +53,14 @@
             Return
         }
 
-        $SidHistoryDomains = @()
+        $SidHistoryDomains = new-object System.Collections.ArrayList
 
         foreach ($sid in $SidHistory)
         {
-            $SidHistoryDomain = [string]::Empty
+            $Object = New-Object PSObject -Property @{
+                SID    = $Sid
+                Domain = $UNKNOWN
+            }
 
             if ($sid -is [System.Security.Principal.SecurityIdentifier])
             {
@@ -65,14 +68,9 @@
                 {
                     if ($sid.AccountDomainSid.Value -eq $TrustedDomain.securityidentifier.accountdomainsid.value)
                     {
-                        $SidHistoryDomain = $TrustedDomain.CN
+                        $Object.Domain = $TrustedDomain.CN
                         Break
                     }
-                }
-
-                if ([string]::IsNullOrEmpty($SidHistoryDomain))
-                {
-                    $SidHistoryDomain = $UNKNOWN
                 }
             }
             else
@@ -81,20 +79,15 @@
 
                 foreach ($TrustedDomain in $TrustedDomains)
                 {
-                    if ($sid -like "$($TrustedDomain.securityidentifier.accountdomainsid.value)-*")
+                    if ($sid -match "$($TrustedDomain.securityidentifier.accountdomainsid.value)-\d+$")
                     {
-                        $SidHistoryDomain = $TrustedDomain.CN
+                        $Object.Domain = $TrustedDomain.CN
                         Break
                     }
                 }
-
-                if ([string]::IsNullOrEmpty($SidHistoryDomain))
-                {
-                    $SidHistoryDomain = $UNKNOWN
-                }
             }
 
-            $SidHistoryDomains += $SidHistoryDomain
+            $SidHistoryDomains.Add($Object) | Out-Null
         }
 
         Write-Output $SidHistoryDomains
