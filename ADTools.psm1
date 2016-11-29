@@ -13,6 +13,7 @@
 . $PSScriptRoot\Test-UPNExists.ps1
 . $PSScriptRoot\Get-NearbyDCHostname.ps1
 . $PSScriptRoot\Test-DomainLockoutStatus.ps1
+. $PSScriptRoot\Split-ADCanonicalName.ps1
 
 
 
