@@ -41,8 +41,8 @@
     }
     catch
     {
-        Write-Verbose "Failed to get any AD ObjectClass = 'TrustedDomain' objects."
         write-error $_
+        Write-Verbose "Failed to get any AD object where ObjectClass = 'TrustedDomain'."
         throw "Unable to get the list of trusted domains."
     }
 
