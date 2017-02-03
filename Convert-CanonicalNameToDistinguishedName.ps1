@@ -49,7 +49,7 @@
     {
         foreach ($entry in $CanonicalName)
         {
-            $ns=New-Object -ComObject NameTranslate
+            $ns=New-Object -ComObject "NameTranslate"
             [System.__ComObject].InvokeMember(“init”,”InvokeMethod”,$null,$ns,($ADS_NAME_INITTYPE_GC,$null))
             [System.__ComObject].InvokeMember(“Set”,”InvokeMethod”,$null,$ns,($UNKNOWN,$entry))
 
