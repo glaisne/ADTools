@@ -26,10 +26,7 @@ Export-ModuleMember -Function $Public.Basename
 
 
 
-$Trusts = Get-ADObject -Filter {ObjectClass -eq "TrustedDomain"} -Properties * -ErrorAction Stop -server $(get-adforest).RootDomain | select trustPartner, securityIdentifier
-
-$Trusts |ft -AutoSize | out-string -stream | % { write-host -ForegroundColor yellow }
-
+#$Trusts = Get-ADObject -Filter {ObjectClass -eq "TrustedDomain"} -Properties * -ErrorAction Stop -server $(get-adforest).RootDomain | select trustPartner, securityIdentifier
 
 
 <#
