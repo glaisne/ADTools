@@ -4,7 +4,7 @@
 RootModule = 'ADTools.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.1.0'
+ModuleVersion = '0.2.0'
 
 # ID used to uniquely identify this module
 GUID = '6563e0d4-631f-4f0e-8b53-5f3df334879e'
