@@ -14,15 +14,13 @@
     [OutputType([boolean])]
     Param
     (
-        # Param1 help description
         [Parameter(Mandatory=$true,
                    ValueFromPipelineByPropertyName=$true,
                    Position=0)]
         [ValidatePattern(".*@.*\..*")]
         [string[]]    $UserPrincipalName,
 
-        # Param2 help description
-        [String]      $Server = $Null
+        [String]      $Server
     )
 
     Begin
@@ -36,22 +34,28 @@
             $foundUPN = $null
             try
             {
-                if ([string]::IsNullOrEmpty($Server))
-                {
-                    $foundUPN = get-aduser -filter {userprincipalname -eq $upn} -ErrorAction Stop
-                }
-                else
+                if ($PSBoundParameters.containskey('Server'))
                 {
                     $foundUPN = get-aduser -filter {userprincipalname -eq $upn} -Server $Server -ErrorAction Stop
                 }
+                else
+                {
+                    $foundUPN = get-aduser -filter {userprincipalname -eq $upn} -ErrorAction Stop
+                }
+            }
+            catch [Microsoft.ActiveDirectory.Management.ADServerDownException]
+            {
+                $err = $_
+                throw "Unable to reach the server specified ($server) : $($err.exception.message)"
             }
             catch
             {
-                $err = $error[0]
+                $err = $_
                 Write-Warning "There was issue trying to access ad user with upn $upn : $($err.exception.message)"
+                Continue
             }
 
-            if ($FoundUPN -eq $null <# this is good. #>)
+            if ($FoundUPN -eq $null)
             {
                 write-output $False
             }
@@ -59,8 +63,6 @@
             {
                 write-output $True
             }
-
-
         }
     }
     End
