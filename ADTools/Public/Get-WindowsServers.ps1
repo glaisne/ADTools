@@ -34,8 +34,15 @@
         Foreach ($dom in $Domain)
         {
             Write-verbose "Searching for Windows Servers in the $dom Domain."
-            $Server = get-adcomputer -filter {operatingsystem -like "*Windows*" -and operatingsystem -like "*Server*" } -server $dom
-            Write-Output $Server
+            Try
+            {
+                get-adcomputer -filter {operatingsystem -like "*Windows*" -and operatingsystem -like "*Server*" } -server $dom -ErrorAction Stop
+            }
+            catch
+            {
+                $err = $_
+                Write-Warning "Failed getting Windows Servers for domain $dom : $($err.Exception.Message)"
+            }
         }
     }
     End

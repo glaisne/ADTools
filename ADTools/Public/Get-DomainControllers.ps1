@@ -48,7 +48,6 @@
             catch
             {
                 Write-error $_
-                return
             }
         }
         else
@@ -60,7 +59,6 @@
             catch
             {
                 Write-error $_
-                return
             }
         }
         Write-Output $($ADDomain.ReplicaDirectoryServers)
