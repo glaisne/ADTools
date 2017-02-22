@@ -17,6 +17,7 @@ function Split-ADCanonicalName
         # Param1 help description
         [Parameter(Mandatory=$true,
                    ValueFromPipelineByPropertyName=$true,
+                   ValueFromPipeline=$true,
                    Position=0)]
         [string[]] $CanonicalName,
         [switch] $leaf
