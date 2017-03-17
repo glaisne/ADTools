@@ -24,19 +24,32 @@
 
 	#>
 
-	[CmdletBinding()]
 	param
 	(
-		[Parameter(Mandatory = $True)]
-		$ProxyAddresses
+		[Parameter(Mandatory = $True,
+                   ParameterSetName = 'ProxyAddresses')]
+        [Microsoft.ActiveDirectory.Management.ADPropertyValueCollection]
+		$ProxyAddresses,
+        
+		[Parameter(Mandatory = $True,
+                   ParameterSetName = 'ADUser')]
+        [Microsoft.ActiveDirectory.Management.ADUser]
+		$ADUser
 	)
 
-	foreach ($proxyAddress In $ProxyAddresses) {
-		If ([string]::Compare([string]$proxyAddress.substring(0,5),"SMTP:",$False) -eq 0)
-		{
-			$Result = $([string]$proxyAddress.substring(5))
-		}
-	}
-	Return $Result
+    if ($PSCmdlet.ParameterSetName -eq 'ADUser')
+    {
+        if ($ADUser.proxyAddresses -is [Microsoft.ActiveDirectory.Management.ADPropertyValueCollection] -and `
+            $ADUser.proxyAddresses.Count -gt 0)
+        {
+            $ProxyAddresses = $ADUser.proxyAddresses
+        }
+        else
+        {
+            [System.Exception.ArgumentException]::new('Invalid or no proxyAddresses on user.')
+        }
+    }
+
+    GetPrimarySmtpAddressFromProxyAddresses -ProxyAddresses $ProxyAddresses
 }
 
