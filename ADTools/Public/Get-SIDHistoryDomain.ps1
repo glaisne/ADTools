@@ -31,14 +31,7 @@
 
         $UNKNOWN = 'UNKNOWN'
 
-#        if ($PSBoundParameters.ContainsKey('Domain'))
-#        {
-            $TrustedDomains = Get-ADObject -Filter {ObjectClass -eq "trustedDomain"} -Properties cn,securityidentifier -server $Domain
-#        }
-#        else
-#        {
-#            $TrustedDomains = Get-ADObject -Filter {ObjectClass -eq "trustedDomain"} -Properties cn,securityidentifier
-#        }
+        $TrustedDomains = Get-ADObject -Filter {ObjectClass -eq "trustedDomain"} -Properties cn,securityidentifier -server $Domain
 
     }
     Process

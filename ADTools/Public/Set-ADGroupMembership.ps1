@@ -143,7 +143,7 @@ function Set-ADGroupMembership
             Try
             {
                 Remove-ADGroupMember -Identity $CurrentGroup.distinguishedName -Members $user.DistinguishedName -ErrorAction Stop
-                "Removed $($user.UserprincipalName) from group $(CurrentGroup.distinguishedName)"
+                "Removed $($user.UserprincipalName) from group $($CurrentGroup.distinguishedName)"
             }
             catch
             {
