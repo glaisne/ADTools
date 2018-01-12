@@ -5,8 +5,7 @@ function Convert-msExchRecipientTypeDetails
     Param
     (
         # Param1 help description
-        [Parameter(Mandatory = $true,
-            ValueFromPipelineByPropertyName = $true,
+        [Parameter(ValueFromPipelineByPropertyName = $true,
             Position = 0)]
         [AllowNull()]
         [int64[]] $msExchRecipientTypeDetails
