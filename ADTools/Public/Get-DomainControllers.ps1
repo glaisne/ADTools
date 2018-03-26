@@ -62,6 +62,7 @@
             }
         }
         Write-Output $($ADDomain.ReplicaDirectoryServers)
+        Write-Output $($ADDomain.ReadOnlyReplicaDirectoryServers)
     }
     End
     { }
